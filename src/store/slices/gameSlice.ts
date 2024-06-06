@@ -41,6 +41,7 @@ const gameSlice = createSlice({
       state.won = 0;
     },
     startPlay(state) {
+      if (!state.bets.length) return;
       const choices = ["rock", "paper", "scissors"] as const;
       const result = choices[Math.floor(Math.random() * choices.length)];
       state.result = result;

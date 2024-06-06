@@ -37,8 +37,9 @@ const ClearButton = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 export const BetControls: React.FC = () => {
   const result = useSelector((state: RootState) => state.game.result);
   const winner = useSelector((state: RootState) => state.game.winner);
+  const bets = useSelector((state: RootState) => state.game.bets);
 
-  const isDisabled = result && !winner;
+  const isDisabled = (result && !winner) || !bets.length;
 
   return result ? (
     <ClearButton ref={null} disabled={!!isDisabled} />
