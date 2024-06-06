@@ -20,7 +20,7 @@ const PlayButton = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   );
 });
 
-const ResetButton = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
+const ClearButton = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const dispatch = useDispatch();
 
   return (
@@ -29,7 +29,7 @@ const ResetButton = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
       onClick={() => dispatch(clearBets())}
       {...props}
     >
-      Reset
+      Clear
     </BetControlsButton>
   );
 });
@@ -41,7 +41,7 @@ export const BetControls: React.FC = () => {
   const isDisabled = result && !winner;
 
   return result ? (
-    <ResetButton ref={null} disabled={!!isDisabled} />
+    <ClearButton ref={null} disabled={!!isDisabled} />
   ) : (
     <PlayButton ref={null} disabled={!!isDisabled} />
   );

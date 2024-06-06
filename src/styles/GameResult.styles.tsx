@@ -19,19 +19,37 @@ export const PositionsPicking = styled.h3`
   text-align: center;
 `;
 
-export const IndividualBets = styled.p`
+export const IndividualBets = styled.div`
+  display: grid;
+  width: 100%;
+  grid-template-columns: 200px 25px 200px;
+  margin-bottom: 25px;
+  grid-gap: 50px;
+  justify-content: center;
+  align-items: center;
   text-transform: uppercase;
   width: 100%;
-  text-align: center;
   color: white;
   font-size: 32px;
   font-weight: bold;
   margin-top: 0;
+  text-align: center;
+  & p {
+    margin: 0;
+    
+    &:first-child {
+      justify-self: end;
+    }
+
+    &:last-child {
+      justify-self: start;
+    }
+  }
 
   & span {
     color: orange;
     font-size: 16px;
-    margin: 0 36px;
+    align-self: end;
   }
 `;
 
@@ -43,4 +61,15 @@ export const BetResult = styled.h2<{ won: boolean }>`
   color: ${({ won }) => (won ? "rgb(0, 255, 0)" : "rgb(255 ,0 ,0)")};
   font-weight: bold;
   margin-top: 0;
+`;
+
+export const WinnerResult = styled.p`
+  text-transform: uppercase;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+
+  & span {
+    color: orange;
+  }
 `;

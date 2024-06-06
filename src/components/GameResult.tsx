@@ -6,6 +6,7 @@ import {
   GameResultContainer,
   IndividualBets,
   PositionsPicking,
+  WinnerResult,
 } from "../styles/GameResult.styles";
 import currency from "currency.js";
 import { Bet, revealPlay } from "../store/slices/gameSlice";
@@ -38,7 +39,7 @@ const GameResult: React.FC = () => {
     () =>
       uniqueBets.map((item) => (
         <IndividualBets key={item}>
-          {result} <span>VS</span> {item}
+          <p>{result}</p> <span>VS</span> <p>{item}</p>
         </IndividualBets>
       )),
     [uniqueBets, result]
@@ -48,10 +49,12 @@ const GameResult: React.FC = () => {
     <div>
       <BetResult won={bets.includes(winner) || !!isDraw}>
         {isDraw ? "Draw" : bets.includes(winner) ? winner : result}
-        {!isDraw && " wins"}
+        {!isDraw && " won"}
       </BetResult>
       {!!won && !isDraw && (
-        <IndividualBets>You win {currency(won).format()}</IndividualBets>
+        <WinnerResult>
+          <span>You win</span> {currency(won).format()}
+        </WinnerResult>
       )}
     </div>
   );
