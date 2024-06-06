@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const InfoHeaderContainer = styled.nav`
   width: 100%;
-  background: black;
+  background: #2b2b2b;
   color: white;
   & ul {
     margin: 0;
@@ -14,6 +14,12 @@ export const InfoHeaderContainer = styled.nav`
 
     & li {
       margin-right: 50px;
+      font-weight: bold;
+
+      & span {
+        color: #f1c40f;
+        text-transform: uppercase;
+      }
     }
   }
 `;

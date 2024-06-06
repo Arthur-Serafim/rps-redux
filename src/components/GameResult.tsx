@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import {
@@ -12,16 +12,30 @@ const GameResult: React.FC = () => {
   const result = useSelector((state: RootState) => state.game.result);
   const winner = useSelector((state: RootState) => state.game.winner);
   const uniqueBets = [...new Set(bets)];
+  const [displayWinner, setDisplayWinner] = useState("");
+
+  useEffect(() => {
+    if (!winner) {
+      setDisplayWinner("");
+    } else {
+      setTimeout(() => {
+        setDisplayWinner(winner);
+      }, 2000);
+    }
+  }, [winner]);
 
   return (
     <GameResultContainer>
-      {result &&
+      {!displayWinner &&
+        result &&
         uniqueBets.map((item) => (
           <IndividualBets>
             {result} <span>VS</span> {item}
           </IndividualBets>
         ))}
-      {winner && <PositionsPicking>{winner} wins</PositionsPicking>}
+      {displayWinner && result && (
+        <IndividualBets>{winner} wins</IndividualBets>
+      )}
       {!result && <PositionsPicking>pick your positions</PositionsPicking>}
     </GameResultContainer>
   );

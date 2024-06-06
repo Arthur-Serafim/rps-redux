@@ -17,7 +17,7 @@ const BetButton: React.FC<BetButtonProps> = ({ bet }) => {
   );
   return (
     <StyledBetButton type={bet} onClick={() => dispatch(placeBet(bet))}>
-      <BetChip>{currentBets.length * 500}</BetChip>
+      {!!currentBets.length && <BetChip>{currentBets.length * 500}</BetChip>}
       <span>{bet}</span>
     </StyledBetButton>
   );

@@ -10,9 +10,15 @@ export const InfoHeader = () => {
   return (
     <InfoHeaderContainer>
       <ul>
-        <li>Balance: {balance}</li>
-        <li>Bet: {bets.length * 500}</li>
-        <li>Win: {won}</li>
+        <li>
+          <span>Balance:</span> {balance}
+        </li>
+        <li>
+          <span>Bet:</span> {bets.length * 500}
+        </li>
+        <li>
+          <span>Win:</span> {won}
+        </li>
       </ul>
     </InfoHeaderContainer>
   );

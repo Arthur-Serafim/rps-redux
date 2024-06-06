@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { clearBets, setResult } from "../store/slices/gameSlice";
 import { RootState } from "../store";
+import { BetControlsButton } from "../styles/BetControls.styles";
 
 const PlayButton = () => {
   const dispatch = useDispatch();
@@ -9,14 +10,18 @@ const PlayButton = () => {
     const choices = ["rock", "paper", "scissors"] as const;
     const randomChoice = choices[Math.floor(Math.random() * choices.length)];
     // dispatch(setResult(randomChoice));
-    dispatch(setResult("rock"));
+    dispatch(setResult(randomChoice));
   };
-  return <button onClick={generateResult}>Play</button>;
+  return <BetControlsButton onClick={generateResult}>Play</BetControlsButton>;
 };
 
 const ResetButton = () => {
   const dispatch = useDispatch();
-  return <button onClick={() => dispatch(clearBets())}>reset</button>;
+  return (
+    <BetControlsButton onClick={() => dispatch(clearBets())}>
+      reset
+    </BetControlsButton>
+  );
 };
 export const BetControls = () => {
   const result = useSelector((state: RootState) => state.game.result);

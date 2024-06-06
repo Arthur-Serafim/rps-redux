@@ -10,6 +10,8 @@ export const StyledBetButton = styled.button<{
   font-size: 32px;
   text-transform: capitalize;
   position: relative;
+  border-radius: 5px;
+  cursor: pointer;
 
   display: inline-flex;
   justify-content: center;
@@ -26,37 +28,39 @@ export const StyledBetButton = styled.button<{
     switch (type) {
       case "rock":
         return css`
-          background: rgba(25, 0, 255, 0.2);
-          border: 2px solid rgb(25, 0, 255);
-          color: rgb(25, 0, 255);
+          background: rgba(0, 0, 255, 0.3);
+          border: 2px solid rgb(0, 0, 255);
+          color: rgb(0, 0, 255);
         `;
       case "paper":
         return css`
-          background: rgba(0, 205, 61, 0.2);
-          border: 2px solid rgb(0, 205, 61);
-          color: rgb(0, 205, 61);
+          background: rgba(0, 255, 0, 0.3);
+          border: 2px solid rgb(0, 255, 0);
+          color: rgb(0, 255, 0);
         `;
       case "scissors":
         return css`
-          background: rgba(253, 17, 17, 0.2);
-          border: 2px solid rgb(253, 17, 17);
-          color: rgb(253, 17, 17);
+          background: rgba(255, 0, 0, 0.3);
+          border: 2px solid rgb(255, 0, 0);
+          color: rgb(255, 0, 0);
         `;
     }
   }}
 `;
 
 export const BetChip = styled.div`
-  width: 100px;
-  height: 100px;
-  min-width: 100px;
-  min-height: 100px;
+  width: 75px;
+  height: 75px;
+  min-width: 75px;
+  min-height: 75px;
   border-radius: 50%;
-  border: 5px solid pink;
-  color: pink;
+  border: 5px solid rgb(25, 0, 255);
+  color: #2b2b2b;
   background: white;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 15px;
+  font-weight: bold;
+  font-size: 24px;
 `;

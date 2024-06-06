@@ -13,7 +13,7 @@ const App: React.FC = () => {
       <div>
         <InfoHeader />
         <GameResult />
-        <div>
+        <div style={{ display: 'flex', justifyContent: "center" }}>
           <BetButton bet="rock" />
           <BetButton bet="paper" />
           <BetButton bet="scissors" />
