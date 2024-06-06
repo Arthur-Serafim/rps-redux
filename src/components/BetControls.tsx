@@ -1,32 +1,50 @@
+import React, { forwardRef, ButtonHTMLAttributes } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearBets, setResult } from "../store/slices/gameSlice";
+import { clearBets, startPlay } from "../store/slices/gameSlice";
 import { RootState } from "../store";
 import { BetControlsButton } from "../styles/BetControls.styles";
 
-const PlayButton = () => {
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
+
+const PlayButton = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const dispatch = useDispatch();
 
   const generateResult = () => {
-    const choices = ["rock", "paper", "scissors"] as const;
-    const randomChoice = choices[Math.floor(Math.random() * choices.length)];
-    // dispatch(setResult(randomChoice));
-    dispatch(setResult(randomChoice));
+    dispatch(startPlay());
   };
-  return <BetControlsButton onClick={generateResult}>Play</BetControlsButton>;
-};
 
-const ResetButton = () => {
-  const dispatch = useDispatch();
   return (
-    <BetControlsButton onClick={() => dispatch(clearBets())}>
-      reset
+    <BetControlsButton ref={ref} onClick={generateResult} {...props}>
+      Play
     </BetControlsButton>
   );
-};
-export const BetControls = () => {
-  const result = useSelector((state: RootState) => state.game.result);
+});
 
-  return result ? <ResetButton /> : <PlayButton />;
+const ResetButton = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
+  const dispatch = useDispatch();
+
+  return (
+    <BetControlsButton
+      ref={ref}
+      onClick={() => dispatch(clearBets())}
+      {...props}
+    >
+      Reset
+    </BetControlsButton>
+  );
+});
+
+export const BetControls: React.FC = () => {
+  const result = useSelector((state: RootState) => state.game.result);
+  const winner = useSelector((state: RootState) => state.game.winner);
+
+  const isDisabled = result && !winner;
+
+  return result ? (
+    <ResetButton ref={null} disabled={!!isDisabled} />
+  ) : (
+    <PlayButton ref={null} disabled={!!isDisabled} />
+  );
 };
 
 export default BetControls;

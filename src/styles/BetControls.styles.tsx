@@ -15,4 +15,9 @@ export const BetControlsButton = styled.button`
   &:hover {
     opacity: 1;
   }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.5;
+  }
 `;

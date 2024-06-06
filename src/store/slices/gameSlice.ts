@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type Bet = "rock" | "paper" | "scissors";
+export type Bet = "rock" | "paper" | "scissors";
 
 interface GameState {
   balance: number;
@@ -40,12 +40,16 @@ const gameSlice = createSlice({
       state.winner = null;
       state.won = 0;
     },
-    setResult(state, action: PayloadAction<Bet>) {
-      const result = action.payload;
+    startPlay(state) {
+      const choices = ["rock", "paper", "scissors"] as const;
+      const result = choices[Math.floor(Math.random() * choices.length)];
+      state.result = result;
+    },
+    revealPlay(state) {
       const previousBalance = state.balance;
       let winner: Bet;
 
-      switch (result) {
+      switch (state.result) {
         case "paper":
           winner = "scissors";
           break;
@@ -55,10 +59,12 @@ const gameSlice = createSlice({
         case "scissors":
           winner = "rock";
           break;
+        default:
+          return;
       }
 
       const uniqueBets = [...new Set(state.bets)];
-      const tiedBets = state.bets.filter((bet) => bet === result);
+      const tiedBets = state.bets.filter((bet) => bet === state.result);
       const winnerBets = state.bets.filter((bet) => bet === winner);
 
       if (uniqueBets.includes(winner)) {
@@ -69,13 +75,12 @@ const gameSlice = createSlice({
       if (uniqueBets.length === 1) {
         state.balance += 500 * tiedBets.length;
       }
-      
+
       state.won = state.balance - previousBalance;
-      state.result = result;
       state.winner = winner;
     },
   },
 });
 
-export const { placeBet, clearBets, setResult } = gameSlice.actions;
+export const { placeBet, clearBets, startPlay, revealPlay } = gameSlice.actions;
 export default gameSlice.reducer;

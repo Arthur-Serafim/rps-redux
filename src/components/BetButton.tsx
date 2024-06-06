@@ -11,13 +11,19 @@ interface BetButtonProps {
 const BetButton: React.FC<BetButtonProps> = ({ bet }) => {
   const dispatch = useDispatch();
   const bets = useSelector((state: RootState) => state.game.bets);
+
   const currentBets = useMemo(
     () => bets.filter((item) => item === bet),
     [bets, bet]
   );
+
+  const handleClick = () => {
+    dispatch(placeBet(bet));
+  };
+
   return (
-    <StyledBetButton type={bet} onClick={() => dispatch(placeBet(bet))}>
-      {!!currentBets.length && <BetChip>{currentBets.length * 500}</BetChip>}
+    <StyledBetButton type={bet} onClick={handleClick}>
+      {currentBets.length > 0 && <BetChip>{currentBets.length * 500}</BetChip>}
       <span>{bet}</span>
     </StyledBetButton>
   );
