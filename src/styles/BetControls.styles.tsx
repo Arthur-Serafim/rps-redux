@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import { COLORS } from "./colors";
 
 export const BetControlsButton = styled.button`
   border-radius: 50px;
   padding: 20px 45px;
-  background: black;
-  border: 2px solid #f1c40f;
-  color: #f1c40f;
+  background: ${COLORS.betControlsButton.background};
+  border: 2px solid ${COLORS.gold};
+  color: ${COLORS.gold};
   box-shadow: none;
   font-size: 20px;
   cursor: pointer;

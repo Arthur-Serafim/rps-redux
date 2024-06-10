@@ -4,6 +4,7 @@ import store from "./store";
 import { BetButton, GameResult } from "./components";
 import GlobalStyles from "./styles/globalStyles";
 import { InfoHeader, BetControls } from "./components";
+import { BetButtonContainer } from "./styles/App.styles";
 
 const App: React.FC = () => {
   return (
@@ -12,11 +13,11 @@ const App: React.FC = () => {
       <div>
         <InfoHeader />
         <GameResult />
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <BetButtonContainer>
           <BetButton bet="rock" />
           <BetButton bet="paper" />
           <BetButton bet="scissors" />
-        </div>
+        </BetButtonContainer>
         <BetControls />
       </div>
     </Provider>

@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import { COLORS } from "./colors";
 
 export const InfoHeaderContainer = styled.nav`
   width: 100%;
-  background: #2b2b2b;
+  background: ${COLORS.dark};
   color: white;
 `;
 
@@ -21,6 +22,6 @@ export const InfoListItem = styled.li`
 `;
 
 export const InfoLabel = styled.span`
-  color: #f1c40f;
+  color: ${COLORS.gold};
   text-transform: uppercase;
 `;

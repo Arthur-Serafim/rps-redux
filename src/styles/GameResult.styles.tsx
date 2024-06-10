@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { COLORS } from "./colors";
 
 export const GameResultContainer = styled.div`
   height: 500px;
@@ -58,7 +59,7 @@ export const BetResult = styled.h2<{ won: boolean }>`
   text-transform: uppercase;
   width: 100%;
   text-align: center;
-  color: ${({ won }) => (won ? "rgb(0, 255, 0)" : "rgb(255 ,0 ,0)")};
+  color: ${({ won }) => (won ? COLORS.betResult.won : COLORS.betResult.lost)};
   font-weight: bold;
   margin-top: 0;
 `;

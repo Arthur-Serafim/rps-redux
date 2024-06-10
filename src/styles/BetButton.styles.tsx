@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { COLORS } from "./colors";
 
 export const StyledBetButton = styled.button<{
   type: "rock" | "paper" | "scissors";
@@ -24,28 +25,11 @@ export const StyledBetButton = styled.button<{
     align-text: center;
   }
 
-  ${({ type }) => {
-    switch (type) {
-      case "rock":
-        return css`
-          background: rgba(0, 0, 255, 0.3);
-          border: 2px solid rgb(0, 0, 255);
-          color: rgb(0, 0, 255);
-        `;
-      case "paper":
-        return css`
-          background: rgba(0, 255, 0, 0.3);
-          border: 2px solid rgb(0, 255, 0);
-          color: rgb(0, 255, 0);
-        `;
-      case "scissors":
-        return css`
-          background: rgba(255, 0, 0, 0.3);
-          border: 2px solid rgb(255, 0, 0);
-          color: rgb(255, 0, 0);
-        `;
-    }
-  }}
+  ${({ type }) => css`
+    background: ${COLORS[type].background};
+    border: 2px solid ${COLORS[type].border};
+    color: ${COLORS[type].color};
+  `}
 `;
 
 export const BetChip = styled.div`
@@ -54,9 +38,9 @@ export const BetChip = styled.div`
   min-width: 75px;
   min-height: 75px;
   border-radius: 50%;
-  border: 5px solid rgb(25, 0, 255);
-  color: #2b2b2b;
-  background: white;
+  border: 5px solid ${COLORS.betChip.border};
+  color: ${COLORS.dark};
+  background: ${COLORS.betChip.background};
   display: flex;
   align-items: center;
   justify-content: center;
