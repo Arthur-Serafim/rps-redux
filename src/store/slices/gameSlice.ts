@@ -1,4 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+  AMOUNT_PER_BET,
+  INITIAL_BALANCE,
+  MULTIPLE_BET_MULTIPLIER,
+  SINGLE_BET_MULTIPLIER,
+} from "../../settings/betting.config";
 
 export type Bet = "rock" | "paper" | "scissors";
 
@@ -11,7 +17,7 @@ interface GameState {
 }
 
 const initialState: GameState = {
-  balance: 5000,
+  balance: INITIAL_BALANCE,
   bets: [],
   result: null,
   winner: null,
@@ -28,10 +34,10 @@ const gameSlice = createSlice({
       const uniqueBets = [...new Set(state.bets)];
       if (
         (uniqueBets.length < 2 || uniqueBets.includes(action.payload)) &&
-        state.balance >= 500
+        state.balance >= AMOUNT_PER_BET
       ) {
         state.bets.push(action.payload);
-        state.balance -= 500;
+        state.balance -= AMOUNT_PER_BET;
       }
     },
     clearBets(state) {
@@ -69,12 +75,15 @@ const gameSlice = createSlice({
       const winnerBets = state.bets.filter((bet) => bet === winner);
 
       if (uniqueBets.includes(winner)) {
-        const multiplier = uniqueBets.length === 1 ? 14 : 3;
-        state.balance += 500 * winnerBets.length * multiplier;
+        const multiplier =
+          uniqueBets.length === 1
+            ? SINGLE_BET_MULTIPLIER
+            : MULTIPLE_BET_MULTIPLIER;
+        state.balance += AMOUNT_PER_BET * winnerBets.length * multiplier;
       }
 
       if (uniqueBets.length === 1) {
-        state.balance += 500 * tiedBets.length;
+        state.balance += AMOUNT_PER_BET * tiedBets.length;
       }
 
       state.won = state.balance - previousBalance;

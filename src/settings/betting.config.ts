@@ -1,0 +1,4 @@
+export const AMOUNT_PER_BET = 500
+export const INITIAL_BALANCE = 5000
+export const SINGLE_BET_MULTIPLIER = 14
+export const MULTIPLE_BET_MULTIPLIER = 3
